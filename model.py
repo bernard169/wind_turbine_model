@@ -33,32 +33,32 @@ aprime8 = np.zeros(len(r))
 a22 = np.zeros(len(r))
 aprime22 = np.zeros(len(r))
 
+data = []
+with open('DU25_A17.dat', 'r') as f : 
+    data = f.readlines()
+
 for h in range(len(Uinf)):
 
     omega = 2 * np.pi / 60 * rpm[h]
     for n in range(len(r)):
-        fichier = open('DU25_A17.dat', 'r')
         i = -1
         c = chord(r[n])
         alpha = []
         Cl = []
         Cd = []
-        for ligne in fichier:
+        for line in data:
             i += 1
             if i < 60:
                 continue
 
-            alpha.append(float(ligne.split()[0])/360*2*np.pi)   # Local angle of attack
-            Cl.append(float(ligne.split()[1]))  # Lift coefficient
-            Cd.append(float(ligne.split()[2]))  # Drag coefficient
-        fichier.close()
-
-        fichier = open('DU25_A17.dat', 'r')
+            alpha.append(float(line.split()[0])/360*2*np.pi)   # Local angle of attack
+            Cl.append(float(line.split()[1]))  # Lift coefficient
+            Cd.append(float(line.split()[2]))  # Drag coefficient
         i = -1
         mi = 1000
 
-        for ligne in fichier:
-
+        for line in data:
+            print(line)
             i += 1
             if i < 80:
                 for j in range(0, 1000):
@@ -90,13 +90,12 @@ for h in range(len(Uinf)):
         # print(aphamin/2*360/np.pi)
         #print(mi)
         #print(dQ)
-        fichier.close()
         Q += dQ
 
     #print(Q)
     P[h] = Q*omega
     print(P[h])
-
+    
 print(a8)
 print(aprime8)
 print(a22)
