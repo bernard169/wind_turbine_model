@@ -58,13 +58,12 @@ for h in range(len(Uinf)):
         mi = 1000
 
         for line in data:
-            print(line)
             i += 1
             if i < 80:
-                for j in range(0, 1000):
-                    alpha1 = alpha[i] + j * (alpha[i + 1] - alpha[i]) / 1000
-                    Cl1 = Cl[i] + j * (Cl[i + 1] - Cl[i]) / 1000
-                    Cd1 = Cd[i] + j * (Cd[i + 1] - Cd[i]) / 1000
+                for j in range(0, 10): #1000
+                    alpha1 = alpha[i] + j * (alpha[i + 1] - alpha[i]) / 10#00
+                    Cl1 = Cl[i] + j * (Cl[i + 1] - Cl[i]) / 10#00
+                    Cd1 = Cd[i] + j * (Cd[i + 1] - Cd[i]) / 10#00
                     phi = alpha1 + beta[h] / 360 * 2 * np.pi # Local flow angle
                     cst = 4 * np.pi * r[n]
                     dst = 1 / 2 * B * c / ((np.sin(phi)) ** 2) * (Cl1 * np.cos(phi) + Cd1 * np.sin(phi))
@@ -95,7 +94,7 @@ for h in range(len(Uinf)):
     #print(Q)
     P[h] = Q*omega
     print(P[h])
-    
+
 print(a8)
 print(aprime8)
 print(a22)
