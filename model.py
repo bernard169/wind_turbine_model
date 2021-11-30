@@ -23,7 +23,7 @@ def chord(r):
     return c
 
 
-dr = 1
+dr = 0.5
 r = np.arange(1.5, 63.1, dr)
 Q = 0
 P = np.zeros(len(Uinf))
