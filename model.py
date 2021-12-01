@@ -34,7 +34,7 @@ a22 = np.zeros(len(r))
 aprime22 = np.zeros(len(r))
 
 data = []
-with open('DU25_A17.dat', 'r') as f : 
+with open('DU25_A17.dat', 'r') as f:
     data = f.readlines()
 
 for h in range(len(Uinf)):
@@ -78,7 +78,6 @@ for h in range(len(Uinf)):
                         amin = a
                         mi = abs(dQ1 - dQ2)
                         dQ = dQ1
-                        #print(dQ)
         if h == 7:
             a8[n] = a
             aprime8[n] = aprime
@@ -86,14 +85,9 @@ for h in range(len(Uinf)):
             a22[n] = a
             aprime22[n] = aprime
 
-        # print(aphamin/2*360/np.pi)
-        #print(mi)
-        #print(dQ)
         Q += dQ
 
-    #print(Q)
     P[h] = Q*omega
-    print(P[h])
 
 print(a8)
 print(aprime8)
@@ -117,12 +111,10 @@ ax = plt.gca()
 f = interp1d(Uinf, P)
 xnew = np.linspace(3, 25, endpoint=True)
 
-plt.plot(Uinf, P, 'o', xnew, f(xnew), '-')
-
-#plt.scatter(wind_speeds, P, color="orange")
+plt.plot(Uinf, P/1e6, 'o', xnew, f(xnew)/1e6, '-', color='b')
 
 plt.xlim(0, 26)
-plt.ylim(0, 6*1e6)
+plt.ylim(0, 10)
 
 plt.grid(True, which='both')
 
@@ -134,9 +126,8 @@ for tick in ax.yaxis.get_major_ticks():
     tick.label1.set_fontweight('bold')
 
 plt.xlabel('Wind Speed [$m/s$]', fontsize=16, fontweight='bold')
-plt.ylabel('Power [$W$]', fontsize=16, fontweight='bold')
+plt.ylabel('Power [$MW$]', fontsize=16, fontweight='bold')
 
-#plt.legend()
 plt.show()
 
 """
@@ -151,16 +142,8 @@ plt.rcParams["axes.labelweight"] = "bold"
 
 ax = plt.gca()
 
-#f = interp1d(Uinf, P)
-#xnew = np.linspace(3, 25, endpoint=True)
-
-plt.plot(r, a8, 'o')
-plt.plot(r, a22, 'o')
-
-#plt.scatter(wind_speeds, P, color="orange")
-
-#plt.xlim(0, 26)
-#plt.ylim(0, 6*1e6)
+plt.plot(r, a8, 'o', label='$U_{inf}$=8')
+plt.plot(r, a22, 'o', label='$U_{inf}$=22')
 
 plt.grid(True, which='both')
 
@@ -174,7 +157,7 @@ for tick in ax.yaxis.get_major_ticks():
 plt.xlabel('Blade Radius [m]', fontsize=16, fontweight='bold')
 plt.ylabel('Axial Induction Factor [/]', fontsize=16, fontweight='bold')
 
-#plt.legend()
+plt.legend()
 plt.show()
 
 """
@@ -189,16 +172,8 @@ plt.rcParams["axes.labelweight"] = "bold"
 
 ax = plt.gca()
 
-#f = interp1d(Uinf, P)
-#xnew = np.linspace(3, 25, endpoint=True)
-
-plt.plot(r, aprime8, 'o')
-plt.plot(r, aprime22, 'o')
-
-#plt.scatter(wind_speeds, P, color="orange")
-
-#plt.xlim(0, 26)
-#plt.ylim(0, 6*1e6)
+plt.plot(r, aprime8, 'o', label='$U_{inf}$=8')
+plt.plot(r, aprime22, 'o', label='$U_{inf}$=22')
 
 plt.grid(True, which='both')
 
@@ -212,5 +187,5 @@ for tick in ax.yaxis.get_major_ticks():
 plt.xlabel('Blade Radius [m]', fontsize=16, fontweight='bold')
 plt.ylabel('Rotational Induction Factor [/]', fontsize=16, fontweight='bold')
 
-#plt.legend()
+plt.legend()
 plt.show()
